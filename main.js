@@ -63,6 +63,11 @@ HM.fail = function() {
     HM.show("失败了");
 }
 HM.succeed = function() {
+    if (HM.clickStep == 1) {
+        HM.cId = HM.firstClick;
+        HM.check();
+        return;
+    }
     var time = HM.timerStop();
     HM.col = 9;
     HM.row = 9;
@@ -126,7 +131,16 @@ HM.mark = function(col,row) {
 }
 HM.load = function() {
     HM.showLoading();
-
+    HM.mCount = 0;
+    HM.cId = "";
+    HM.firstClick = "";
+    HM.clickStep = 0;
+    HM.check();
+    document.getElementsByClassName("btn")[0].style.display = "inline";
+    HM.hideLoading();
+    HM.timerStart();
+}
+HM.check = function() {
     HM.restOfMine = HM.mine;
     HM.restOfBox = HM.col*HM.row-HM.mine;
     HM.restOfMark = HM.mine;
@@ -221,7 +235,19 @@ HM.load = function() {
             box.dataset.clicked = "false";
             box.dataset.marked = "false";
             box.onclick = function() {
-                this.dataset.clicked = "true";
+                if (HM.clickStep==0) {
+                    HM.firstClick = this.id;
+                }
+                HM.clickStep++;
+                if (HM.mCount == 0 && this.dataset.mine=="mine") {
+                    // console.log("What the fuck is this",this.id);
+                    HM.mCount++;
+                    HM.cId = this.id;
+                    HM.check();
+                    return;
+                } else {
+                    HM.mCount++;
+                }
                 if (this.dataset.mine=="mine") {
                     HM.fail();
                 } else if (this.dataset.mine=="empty") {
@@ -250,6 +276,14 @@ HM.load = function() {
         }
         document.getElementById("mainBox").appendChild(col);
     }
-    HM.hideLoading();
-    HM.timerStart();
+    if (HM.mCount>0) {
+        //alert("hey");
+        if (document.getElementById(HM.cId).dataset.mine == "mine") {
+            //alert("x");
+            HM.check();
+        } else {
+            //alert("y");
+            document.getElementById(HM.cId).click();
+        }
+    }
 }
