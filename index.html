@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HMinesweeper - Designed by HuajiFish</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main_2.js"></script>
+</head>
+<body>
+    <div id="loading">加载中<script>document.getElementById("loading").style.lineHeight = document.body.clientHeight+"px";</script></div>
+    <div style="display:block;text-align:center;padding-bottom: 40px;" class="inline">
+        <label>列：</label><input id="col" type="number" min="7" max="30" value="9" placeholder="输入列数" onfocus="this.blur()" />&nbsp;&nbsp;
+        <label>行：</label><input id="row" type="number" min="7" max="30" value="9" placeholder="输入行数" onfocus="this.blur()" />&nbsp;&nbsp;
+        <label>雷数：</label><input id="mine" type="number" min="5" value="10" placeholder="输入雷数" onfocus="this.blur()" />&nbsp;&nbsp;
+        <button class="btn" style="display: none !important;">重新开始</button>
+        <script style="display: none !important">
+            document.getElementById("mine").addEventListener("change", function() {
+                this.max = parseInt(document.getElementById("col").value)*parseInt(document.getElementById("row").value)-5;
+            })
+        </script>
+    </div>
+    <div id="mainBox"><p id="start" style="height:280px;line-height:280px;font-size:40px;text-align: center;margin: 0;">开始</p></div>
+    <script>document.getElementById("start").addEventListener('click',function() {
+        HM.col = parseInt(document.getElementById("col").value);
+        HM.row = parseInt(document.getElementById("row").value);
+        HM.mine = parseInt(document.getElementById("mine").value);
+        HM.load();
+    });</script>
+    <script>document.getElementsByClassName("btn")[0].addEventListener('click',function() {
+            HM.col = parseInt(document.getElementById("col").value);
+            HM.row = parseInt(document.getElementById("row").value);
+            HM.mine = parseInt(document.getElementById("mine").value);
+            HM.load();
+        });</script>
+</body>
+</html>
