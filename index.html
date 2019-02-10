@@ -30,7 +30,7 @@
     <button id="alertBox_button"></button>
     <script type="text/javascript">
         if (sessionStorage.getItem("ttt")===null){
-            HM.alert("HMinesweeper", "这应该算是HuajiFish扫雷，bug有点多。<br>基本操作：<br>&nbsp;&nbsp;左键：踩雷（划掉）<br>&nbsp;&nbsp;右键：标记<br><a href='https://github.com/TheGodOfHuaji/HMinesweeper' target='_blank'><br>Github地址</a>", "下一步", function(){
+            HM.alert("HMinesweeper", "这应该算是HuajiFish扫雷，bug有点多。<b>最好不要在移动端（手机、Pad）食用</b><br>基本操作：<br>&nbsp;&nbsp;左键：踩雷（划掉）<br>&nbsp;&nbsp;右键：标记<br><a href='https://github.com/TheGodOfHuaji/HMinesweeper' target='_blank'><br>Github地址</a>", "下一步", function(){
                 HM.alert("北京市第三区交通委提醒您：", "道路千万条，安全第一条<br>行车不规范，亲人两行泪", "确定", function(){
                     sessionStorage.setItem("ttt","right");
                 });
