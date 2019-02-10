@@ -9,11 +9,12 @@
     <script src="main.js"></script>
 </head>
 <body>
+<div id="page_content">
     <div id="loading">加载中<script>document.getElementById("loading").style.lineHeight = document.body.clientHeight+"px";</script></div>
     <div style="display:block;text-align:center;padding-bottom: 40px;" class="inline">
         <label>列：</label><input id="col" type="number" min="7" max="30" value="9" placeholder="输入列数" onfocus="this.blur()" />&nbsp;&nbsp;
         <label>行：</label><input id="row" type="number" min="7" max="30" value="9" placeholder="输入行数" onfocus="this.blur()" />&nbsp;&nbsp;
-        <label>雷数：</label><input id="mine" type="number" min="5" value="10" placeholder="输入雷数" onfocus="this.blur()" />&nbsp;&nbsp;
+        <label>雷数：</label><input id="mine" type="number" min="5" max="" style="width:75px" value="10" placeholder="输入雷数" onfocus="this.blur()" />&nbsp;&nbsp;
         <button class="btn" style="display: none !important;">重新开始</button>
         <script style="display: none !important">
             document.getElementById("mine").addEventListener("change", function() {
@@ -22,6 +23,21 @@
         </script>
     </div>
     <div id="mainBox"><p id="start" style="height:280px;line-height:280px;font-size:40px;text-align: center;margin: 0;">开始</p></div>
+</div>
+<div id="alertBox">
+    <h1 id="alertBox_title"></h1>
+    <p id="alertBox_content"></p>
+    <button id="alertBox_button"></button>
+    <script type="text/javascript">
+        if (sessionStorage.getItem("ttt")===null){
+            HM.alert("HMinesweeper", "这应该算是HuajiFish扫雷，bug有点多。<br>基本操作：<br>&nbsp;&nbsp;左键：踩雷（划掉）<br>&nbsp;&nbsp;右键：标记<br><a href='https://github.com/TheGodOfHuaji/HMinesweeper' target='_blank'><br>Github地址</a>", "下一步", function(){
+                HM.alert("北京市第三区交通委提醒您：", "道路千万条，安全第一条<br>行车不规范，亲人两行泪", "确定", function(){
+                    sessionStorage.setItem("ttt","right");
+                });
+            });
+        }
+    </script>
+</div>
     <script>document.getElementById("start").addEventListener('click',function() {
         HM.col = parseInt(document.getElementById("col").value);
         HM.row = parseInt(document.getElementById("row").value);
